@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use \App\Models\User;
+use \App\Models\Profile;
+use \App\Models\Thread;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $users = User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@multividas.com',
+        ]);
+        foreach ($users as $user) {
+            Profile::factory()->for($user)->create();
+            Thread::factory()->count(4)->for($user)->create();
+        }
     }
 }
