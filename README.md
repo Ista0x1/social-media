@@ -19,9 +19,6 @@ This is a simple social media platform built with Laravel 10 where users can vie
 
 git clone https://github.com/ista0x1/social-media.git
 
-css
-Copy code
-
 2. Navigate to the project directory:
 
 cd social-media
