@@ -17,10 +17,12 @@ class DatabaseSeeder extends Seeder
     {
         $users = User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@multividas.com',
         ]);
+        Profile::factory()->for($user)->create();
+        Thread::factory()->count(3)->for($user)->create();
         foreach ($users as $user) {
             Profile::factory()->for($user)->create();
             Thread::factory()->count(4)->for($user)->create();

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\ThreadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
+});
+Route::post('auth/login' , [UserController::class,'authLogin'])->name('auth.login');
+Route::group(['middleware'=>['AuthCheck']], function(){
+    Route::get('thread' ,[ThreadController::class , 'index']);
+
 });
